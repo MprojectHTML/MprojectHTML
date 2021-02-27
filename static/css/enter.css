@@ -100,3 +100,27 @@ button {
   font-size: 20px;
   margin-bottom: 70px;
 }
+
+div#status {
+  padding: 10px;
+  border: solid 2px #666666;
+  border-radius: 4px;
+  margin: auto 15px;
+}
+
+.item.passive {
+  color: #999999;
+}
+
+.item.active {
+  color: red;
+}
+
+button a {
+  text-decoration: none;
+  color: #000;
+}
+
+button a:hover {
+  text-decoration: underline;
+}
