@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>入力</title>
+    <style>
+      .arrow {
+        width: 45px;
+        /* ボックスの横幅を指定する */
+        height: 45px;
+        /* ボックスの高さを指定する */
+        border-top: 2px solid #666666;
+        /* 境界線の上部を実線に指定する*/
+        border-right: 2px solid #666666;
+        /* 境界線の上部を実線に指定する*/
+        transform: rotate(45deg);
+        /* ボックスを回転させる（右向き矢印） */
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="http://yui.yahooapis.com/3.18.1/build/cssreset-min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/css/enter.css" />
+    <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>-->
+    <!-- 本番バージョン、サイズと速度のために最適化されています -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+
+  <body>
+    <h1>
+      <div id="status">
+        <div class="container">
+          <div class="item active">入力&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>
+          <div>
+            <div class="arrow"></div>
+          </div>
+
+          <div class="item">
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp確認&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          </div>
+          <div>
+            <div class="arrow"></div>
+          </div>
+
+          <div class="item">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp完了</div>
+        </div>
+      </div>
+    </h1>
+    <div class="sam">
+      <div class="enter">
+        <p>開始:&nbsp&nbsp5:00</p>
+        <p>終了:&nbsp&nbsp7:00</p>
+        <p>
+          球場:&nbsp&nbsp会津球場&nbsp;&nbsp;<a
+            href="https://goo.gl/maps/BW4B1R5LdCrGYAip7"
+            target="_blank"
+            >GoogleMapで開く</a
+          >
+        </p>
+
+        <div class="message">
+          <form action="{{url_for('kakunin')}}" method="POST" id="form_en">
+            <div id="radio1">
+              <b>助っ人</b>
+              <a class="tooltip"
+                ><i class="fas fa-question-circle"></i
+                ><span class="remark"
+                  >試合を申し込みたいけど、人数が足りていない際に、必要、の欄にチェックをつけ、必要な人数を入力してください。</span
+                ></a
+              >：
+              <input
+                @click="Flag(0)"
+                type="radio"
+                id="r1_1"
+                name="assistant"
+                value="不必要"
+              /><label for="r1_1"> 不必要</label>
+              <input
+                @click="Flag(1)"
+                type="radio"
+                id="r1_2"
+                name="assistant"
+                value="必要"
+              /><label for="r1_2"> 必要</label>
+
+              <span v-show="flag === 1">
+                <label id="how">人数:</label>
+                <select name="number" for="how">
+                  <option value="1">1人</option>
+                  <option value="2">2人</option>
+                  <option value="3">3人</option>
+                  <option value="4">それ以上</option>
+                </select>
+              </span>
+            </div>
+            <div id="radio2">
+              <b>審判</b>
+              <a class="tooltip"
+                ><i class="fas fa-question-circle"></i
+                ><span class="remark"
+                  >審判のご協力をして頂ける際は、&#013;不必要、にチェックをつけてください。また、審判を出すことが厳しい場合には、必要、にチェックしてください。</span
+                ></a
+              >：
+              <input type="radio" id="r2_1" name="judge" value="不必要" /><label
+                for="r2_1"
+              >
+                不必要</label
+              >
+              <input type="radio" id="r2_2" name="judge" value="必要" /><label
+                for="r2_2"
+              >
+                必要</label
+              >
+            </div>
+          </form>
+        </div>
+        <span class="war">{{warring}}</span>
+      </div>
+    </div>
+    <div id="enter">
+      <button type="submit" name="name" value="値" form="form_en">
+        内容確認
+      </button>
+    </div>
+    <script src="/static/js/enter.js"></script>
+  </body>
+</html>
